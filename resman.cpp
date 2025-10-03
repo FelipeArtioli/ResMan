@@ -79,7 +79,7 @@ void printBanner() {
 }
 
 #ifdef _WIN32
-// ===== Windows-specific resolution handling =====
+// Windows-specific resolution handling
 void setResolution(int width, int height, DEVMODE &backup) {
   EnumDisplaySettings(NULL, ENUM_CURRENT_SETTINGS, &backup);
 
@@ -136,21 +136,23 @@ void countdown() {
 }
 #endif
 
-//Menu drawing
+// Menu drawing
 int drawMenu(int selected) {
-  const char *options[] = {"2560 x 1080", "1366 x 768", "800 x 600", "Exit"};
+  const char *options[] = {"2560 x 1080", "1920 x 1080", "1366 x 768", "Exit"};
   int numOptions = sizeof(options) / sizeof(options[0]);
 
   clear();
   printBanner();
 
-  setColor(14);
-  std::cout << "+---------------------------+\n";
+  setColor(11);
+  std::cout << "──────────────────────────────────────────────────────────────"
+               "────────────────\n";
   setColor(15);
   std::cout << "| Use j/k or arrows to move |\n";
   std::cout << "| Enter or l to select      |\n";
-  setColor(14);
-  std::cout << "+---------------------------+\n";
+  setColor(11);
+  std::cout << "──────────────────────────────────────────────────────────────"
+               "────────────────\n";
   setColor(15);
 
   for (int i = 0; i < numOptions; i++) {
@@ -162,14 +164,15 @@ int drawMenu(int selected) {
       std::cout << "   " << options[i] << "\n";
     }
   }
-  setColor(14);
-  std::cout << "+---------------------------+\n";
+  setColor(11);
+  std::cout << "──────────────────────────────────────────────────────────────"
+               "────────────────\n";
   setColor(15);
 
   return numOptions;
 }
 
-// ===== Input handling =====
+// Input handling
 #ifdef _WIN32
 int getKey() {
   int key = _getch();
@@ -180,7 +183,7 @@ int getKey() {
   return key;
 }
 #else
-// Raw input reader for Linux/macOS
+// Raw input reader for Linux
 int getKey() {
   struct termios oldt, newt;
   int ch;
@@ -229,12 +232,12 @@ int main() {
           height = 1080;
         }
         if (selected == 1) {
-          width = 1366;
-          height = 768;
+          width = 1920;
+          height = 1080;
         }
         if (selected == 2) {
-          width = 800;
-          height = 600;
+          width = 1366;
+          height = 768;
         }
 
 #ifdef _WIN32
