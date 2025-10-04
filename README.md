@@ -25,6 +25,10 @@ A lightweight TUI tool to switch between preset screen resolutions on Windows.
       Exit
     +============================================+
 
+## Why?
+
+I like to change screen resolution when using my machines remotely, and I find that using the default Windows video settings is kinda annoying. So I built my own tool to do this. 
+
 ## Features
 
 - Switch between preset resolutions (hardcoded or custom)
@@ -34,6 +38,7 @@ A lightweight TUI tool to switch between preset screen resolutions on Windows.
 
 ## Roadmap
 
+- [ ] Multi-monitor support
 - [ ] Config file for user presets
 - [ ] Linux backend via xrandr
 - [ ] Prebuilt binaries for Windows
