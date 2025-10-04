@@ -178,7 +178,6 @@ int getKey() {
   return key;
 }
 #else
-// Raw input reader for Linux
 int getKey() {
   struct termios oldt, newt;
   int ch;
@@ -192,7 +191,7 @@ int getKey() {
   if (ch == 27) { // possible arrow
     if (getchar() == 91) {
       int arrow = getchar();
-      return 1000 + arrow; // encode arrows
+      return 1000 + arrow;
     }
   }
   return ch;
@@ -209,11 +208,13 @@ int main() {
 
     int key = getKey();
 
-    if (key == 'k' || key == 1000 + 'A') { // up
+    if (key == 'k' || key == 1000 + 72 ||
+        key == 1000 + 65) { // up: k / WinUp / LinuxUp
       selected = (selected - 1 + numOptions) % numOptions;
-    } else if (key == 'j' || key == 1000 + 'B') { // down
+    } else if (key == 'j' || key == 1000 + 80 ||
+               key == 1000 + 66) { // down: j / WinDown / LinuxDown
       selected = (selected + 1) % numOptions;
-    } else if (key == 13 || key == 'l') { // enter/l
+    } else if (key == 13 || key == 10 || key == 'l') { // enter / l
       if (selected == numOptions - 1) {
         clear();
         std::cout << "Goodbye!\n";
