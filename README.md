@@ -3,6 +3,29 @@
 A lightweight TUI tool to switch between preset screen resolutions on Windows.
 Includes vim-style navigation and automatic restore if resolution is not confirmed.
 
+## Preview
+
+                +============================================+
+                |                                            |
+                |    ______          ___  ___                |
+                |    | ___ \         |  \/  |                |
+                |    | |_/ /___  ___ | .  . | __ _ _ __      |
+                |    |    // _ \/ __|| |\/| |/ _` | '_ \     |
+                |    | |\ \  __/\__ \| |  | | (_| | | | |    |
+                |    \_| \_\___||___/\_|  |_/\__,_|_| |_|    |
+                |                                            |
+                +============================================+
+
+                +============================================+
+                 Use j/k or arrows to move 
+                 Enter or l to select      
+                +============================================+
+                 > 2560 x 1080 <
+                   1920 x 1080
+                   1366 x 768
+                   Exit
+                +============================================+
+
 ## Features
 
 - Switch between preset resolutions (hardcoded or custom)
