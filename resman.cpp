@@ -6,6 +6,47 @@
 #ifdef _WIN32
 #include <conio.h>
 #include <windows.h>
+
+void setConsoleSize(int width, int height) {
+  HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
+  // 1️⃣ Set buffer size
+  COORD bufferSize;
+  bufferSize.X = width;
+  bufferSize.Y = height;
+  SetConsoleScreenBufferSize(hOut, bufferSize);
+
+  // 2️⃣ Set window size
+  SMALL_RECT windowSize;
+  windowSize.Left = 0;
+  windowSize.Top = 0;
+  windowSize.Right = width - 1;
+  windowSize.Bottom = height - 1;
+  SetConsoleWindowInfo(hOut, TRUE, &windowSize);
+}
+
+void disableResize() {
+  HWND hwnd = GetConsoleWindow();
+  LONG style = GetWindowLong(hwnd, GWL_STYLE);
+  style &= ~(WS_SIZEBOX | WS_MAXIMIZEBOX); // disable resizing & maximize
+  SetWindowLong(hwnd, GWL_STYLE, style);
+}
+
+void centerConsoleWindow(int width, int height) {
+  HWND hwnd = GetConsoleWindow();
+  RECT desktop;
+  const HWND hDesktop = GetDesktopWindow();
+  GetWindowRect(hDesktop, &desktop);
+
+  int screenWidth = desktop.right;
+  int screenHeight = desktop.bottom;
+
+  int x = (screenWidth - width * 8) / 2;    // approx. 8 pixels per char
+  int y = (screenHeight - height * 16) / 2; // approx. 16 pixels per char
+
+  MoveWindow(hwnd, x, y, width * 8, height * 16, TRUE);
+}
+
 #else
 #include <stdio.h>
 #include <termios.h>
@@ -200,6 +241,16 @@ int getKey() {
 
 // Main
 int main() {
+
+#ifdef _WIN32
+  const int consoleWidth = 50;  // match ASCII border width
+  const int consoleHeight = 20; // match ASCII border height
+
+  setConsoleSize(consoleWidth, consoleHeight);
+  disableResize();
+  centerConsoleWindow(consoleWidth, consoleHeight);
+#endif
+
   int selected = 0;
   int numOptions;
 
