@@ -243,8 +243,8 @@ int getKey() {
 int main() {
 
 #ifdef _WIN32
-  const int consoleWidth = 50;  // match ASCII border width
-  const int consoleHeight = 20; // match ASCII border height
+  const int consoleWidth = 51;  // match ASCII border width
+  const int consoleHeight = 25; // match ASCII border height
 
   setConsoleSize(consoleWidth, consoleHeight);
   disableResize();
